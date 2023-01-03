@@ -22,25 +22,31 @@ namespace KargoTakip
         public AdminMusteriListe()
         {
             InitializeComponent();
-            bag = new MySqlConnection("Server=localhost;Database=beyzabp;Uid=root;Pwd='';");
+            bag = new MySqlConnection("Server=localhost;Database=musteriler;Uid=root;Pwd='';");
+            
+        MySqlDataReader drd;
+        }
+
+        public void veri(string veri)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(veri, bag);
+            DataSet grid = new DataSet();
+            da.Fill(grid);
+
+            dataGridView1.DataSource = grid.Tables[0];
         }
 
         private void AdminMusteriListe_Load(object sender, EventArgs e)
         {
-            bag.Open();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = bag;
-            cmd.CommandText = "select * from kullancilar where kadi='"+Settings1.Default.kadi+"'";
-           drd = cmd.ExecuteReader();
+           
+            veri("Select * FROM bilgiler");
             
-            while (drd.Read())
-            {
-                label1.Text = drd["Adsoyad"].ToString();
-                label2.Text = drd["tc"].ToString();
-                label3.Text = drd["dgm"].ToString();
+            
 
-            }
-            drd.Close();
+
+
+
+
             //MySqlCommand cmd1 = new MySqlCommand();
             //cmd1.Connection = bag;
             //cmd1.CommandText = "select * from musteri where id=11 ";

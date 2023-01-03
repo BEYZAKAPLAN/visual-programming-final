@@ -20,13 +20,15 @@ namespace KargoTakip
             InitializeComponent();
         }
 
+
+
         private void button7_Click(object sender, EventArgs e)
         {try
             {
                 bag.Open();
                 MySqlCommand komut = new MySqlCommand("UPDATE gonderi set kdurum='" + comboBox2.Text + "' where gonderi_no='" + comboBox1.Text + "'", bag);
                 komut.ExecuteNonQuery();
-                MessageBox.Show("günceendi");
+                MessageBox.Show("güncellendi"); 
                 bag.Close();
             }
             catch(Exception ex)
